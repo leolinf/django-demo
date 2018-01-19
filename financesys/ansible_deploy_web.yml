@@ -1,0 +1,11 @@
+---
+- hosts: webservers
+  user: ubuntu
+  tasks:
+  - name: git pull code form github
+    git: repo=https://github.com/faalin/financesys.git dest=/home/ubuntu/test
+  - name: pip install -r requirements.txt      
+    pip: requirements=/home/ubuntu/test/requirements.txt virtualenv=/home/ubuntu/test/venv
+  - name: supervisorctl
+    remote_user: root
+    supervisorctl: name=finance state=restarted config=/home/ubuntu/test/finance.conf

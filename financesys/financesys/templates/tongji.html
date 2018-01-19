@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% block left_content %}
+    <div class="topnews">
+    <h2>统计展示</h2>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 650px;height:500px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+        baseOption: {
+            title : {
+                text: '新闻类型比例',
+                subtext: '统计分析',
+                x:'center'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                data:['非常重要新闻','重要新闻','一般新闻']
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType : {
+                        show: true,
+                        type: ['pie', 'funnel']
+                    },
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            series : [
+                {
+                    name:'3天内新闻占比',
+                    type:'pie',
+                    roseType : 'radius',
+                    label: {
+                        normal: {
+                            show: false
+                        },
+                        emphasis: {
+                            show: true
+                        }
+                    },
+                    lableLine: {
+                        normal: {
+                            show: false
+                        },
+                        emphasis: {
+                            show: true
+                        }
+                    },
+                    data:[
+                         {value:{{ c }}, name:'非常重要新闻'},
+                         {value:{{ b }}, name:'重要新闻'},
+                         {value:{{ a }}, name:'一般新闻'}
+                    ]
+                },
+                {
+                    name:'一周内新闻占比',
+                    type:'pie',
+                    roseType : 'area',
+                    data:[
+                    {value:{{ cc }}, name:'非常重要新闻'},
+                    {value:{{ bb }}, name:'重要新闻'},
+                    {value:{{ aa }}, name:'一般新闻'}
+                    ]
+                }
+            ]
+        },
+        media: [
+            {
+                option: {
+                    legend: {
+                        right: 'center',
+                        bottom: 0,
+                        orient: 'horizontal'
+                    },
+                    series: [
+                        {
+                            radius: [20, '50%'],
+                            center: ['25%', '50%']
+                        },
+                        {
+                            radius: [30, '50%'],
+                            center: ['75%', '50%']
+                        }
+                    ]
+                }
+            },
+            {
+                query: {
+                    minAspectRatio: 1
+                },
+                option: {
+                    legend: {
+                        right: 'center',
+                        bottom: 0,
+                        orient: 'horizontal'
+                    },
+                    series: [
+                        {
+                            radius: [20, '50%'],
+                            center: ['25%', '50%']
+                        },
+                        {
+                            radius: [30, '50%'],
+                            center: ['75%', '50%']
+                        }
+                    ]
+                }
+            },
+            {
+                query: {
+                    maxAspectRatio: 1
+                },
+                option: {
+                    legend: {
+                        right: 'center',
+                        bottom: 0,
+                        orient: 'horizontal'
+                    },
+                    series: [
+                        {
+                            radius: [20, '50%'],
+                            center: ['50%', '30%']
+                        },
+                        {
+                            radius: [30, '50%'],
+                            center: ['50%', '70%']
+                        }
+                    ]
+                }
+            },
+            {
+                query: {
+                    maxWidth: 500
+                },
+                option: {
+                    legend: {
+                        right: 10,
+                        top: '15%',
+                        orient: 'vertical'
+                    },
+                    series: [
+                        {
+                            radius: [20, '50%'],
+                            center: ['50%', '30%']
+                        },
+                        {
+                            radius: [30, '50%'],
+                            center: ['50%', '75%']
+                        }
+                    ]
+                }
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+    </script>
+    </div>
+{% endblock %}

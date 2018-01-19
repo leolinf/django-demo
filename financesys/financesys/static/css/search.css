@@ -1,0 +1,56 @@
+body {
+font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+font-size:14px;
+}
+
+h1 {
+margin-top:0px;
+margin-bottom:8px;
+}
+
+/* 链接 */
+a {
+text-decoration:none;
+color:#1c00ff;
+}
+
+a:hover {
+color:#5f00e4;
+}
+fieldset.search_keleyi_com {
+padding: 0px;
+border: none;
+width: 232px;
+background:#e0e0e0;
+}
+
+fieldset.search_keleyi_com:hover {
+background: #a8a8a8;
+}
+.search_keleyi_com input, .search_keleyi_com button {
+border: none;
+float: left;
+}
+.search_keleyi_com input.box_keleyi_com {
+height: 28px;
+width: 200px;
+margin-right: 0px;
+padding-right: 0px;
+background: #e0e0e0;
+margin: 1px;
+}
+.search_keleyi_com input.box_keleyi_com:focus {
+background: #e8e8e8 ;
+outline: none;
+}
+.search_keleyi_com button.btn_keleyi_com {
+border: none;
+width: 28px;
+height: 28px;
+margin: 0px auto;
+margin: 1px;
+background: url(http://keleyi.com/keleyi/phtml/divcss/8/search_blue.png) no-repeat top right;
+}
+.search_keleyi_com button.btn_keleyi_com:hover {
+background: url(http://keleyi.com/keleyi/phtml/divcss/8/search_black.png) no-repeat bottom right;
+}

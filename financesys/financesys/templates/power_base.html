@@ -1,0 +1,73 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>财经新闻网实时新闻监控系统</title>
+<meta name="keywords" content="{{ SITE_NAME }}" />
+<meta name="description" content="{{ SITE_DESC }}" />
+<link href="{% static 'css/bootstrap-combined.min.css' %}" rel="stylesheet" >
+<link href="{% static 'css/base.css' %}" rel="stylesheet">
+<link href="{% static 'css/index.css' %}" rel="stylesheet">
+{% block custom_css %}{% endblock %}
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/sliders.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/echarts.common.min.js' %}"></script>
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+{% block custom_js %}{% endblock %}
+</head>
+<body>
+{% if not request.user.is_authenticated %}
+<div>
+<h3> 
+    <a href='/power/reg/' style="color:#C5021A;float:right;margin-left:5px;margin-right:5px;" >&nbsp;&raquo;注册</a>
+
+    <a href='/power/login/' style="color:#0287c5;float:right" >&raquo;登陆</a>
+</h3>
+</div>
+{% else %}
+<div class='login_info'>
+    <h3>
+    <a href="/power/logout/" style="color:#0287c5;float:right" >&nbsp;&nbsp;&nbsp;&raquo;退出</a>
+    <a style="color:#B10B0B;float:right" >{{ request.user.username }}</a>
+    </h3>
+ </div>
+{% endif %}
+<header>
+  <div class="logo">
+      <h1>{{ SITE_NAME }}</h1>
+      <p>{{ SITE_DESC }}</p>
+  </div>
+  <nav id="topnav" class="f_r">
+    <ul>
+      <a href="/home/">首页</a>
+      <a href="/home/important/">重要新闻</a>
+      <a href="/home/most_important/">特别重要</a>
+      <a href="/home/today_sort/">当日排行</a>
+      <a href="/power/">统计展示</a>
+      <a href="/power/quanzhong/">关键词权重</a>
+      <!--
+      <a href="/power/setting/">站点监控</a>
+       -->
+    </ul>
+    <script src="{% static 'js/nav.js' %}"></script>
+  </nav>
+</header>
+<article>
+  <div class="l_box f_l" style="width: 1000px;">
+      {% block left_content %}{% endblock %}
+  </div>
+</article>
+<footer>
+  <p class="ft-copyright" id="footer" style="height:none">樊林 ICP备007号-1</p>
+  <div id="tbox">
+      <!--
+      <a id="togbook" href=""></a> 
+      -->
+      <a id="gotop" href="#top"></a> 
+  </div>
+</footer>
+</body>
+</html>

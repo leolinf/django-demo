@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load myfilter %}
+{% block left_content %}
+    <div class="topnews">
+        <h2>{{ key }}</h2>
+      {% for article in article_list %}
+      <div class="blogs">
+        <ul>
+          <h3><a href="/home/detail/?id={{ article.id }}" target="_blank">{{ article.title|truncatechars:40 }}</a></h3>
+          <p>{{ article.content|list_filter|truncatechars:80 }}</p>
+          <p class="autor">
+          {% ifequal article.relationship 1 %}
+          <span class="lm f_l"><a>一般新闻</a>&nbsp;</span>
+          {% endifequal %}
+          {% ifequal article.relationship 2 %}
+          <span class="lm f_l"><a style="color: #FF6000">重要新闻</a>&nbsp;</span>
+          {% endifequal %}
+          {% ifequal article.relationship 3 %}
+          <span class="lm f_l">
+          <a style="color:#980707">非常重要新闻</a>&nbsp;
+          </span>
+          {% endifequal %}
+          <span class="dtime f_l">{{ article.release_time| date:'Y-m-d H:i:s' }}
+          </span>
+          <span class="viewnum f_r">浏览（<a>{{article.page_view}}</a>）</span>
+          <span class="pingl f_r">评论（<a>0</a>）</span></p>
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+    {% include 'pagination.html' %}
+{% endblock %}
